@@ -10,9 +10,7 @@ node  {
   ]
 
   stage('execute shell') {
-      ansiColor('xterm') {
           sh ("echo ${extraPackages.join(' ')}")
-      }
  }
 }
 
