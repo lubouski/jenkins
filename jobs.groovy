@@ -1,3 +1,13 @@
+def extraPackages = [
+    'kazoo',
+    'jmespath',
+    'grampg',
+    'hvac',
+    'dnspython',
+    'pywinrm',
+    'passlib'
+]
+
 pipeline {
     agent any
 
@@ -12,7 +22,7 @@ pipeline {
                     if (params.region != "ALL") {
                        sh "echo ${params.region}"
                     } else {
-                       sh "echo ALL"
+                       sh "echo ${extraPackages}"
                     }
                  }
             }
