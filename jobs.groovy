@@ -2,13 +2,19 @@ pipeline {
     agent any
 
     parameters {
-        string(defaultValue: "TEST", description: 'What environment?', name: 'userFlag')
-        choice(choices: ['US-EAST-1', 'US-WEST-2'], description: 'What AWS region?', name: 'region')
+        string(defaultValue: "", description: 'What environment?', name: 'userFlag')
+        choice(choices: ['US-EAST-1', 'US-WEST-2', 'ALL'], description: 'What AWS region?', name: 'region')
     }
     stages {
         stage("executing echo command") {
             steps {
-                sh "echo ${params.region}; cat Vagrantfile"
+                script {
+                    if (params.region != "ALL") {
+                       sh "echo ${params.region}"
+                    } else {
+                       sh "echo ALL"
+                    }
+                 }
             }
         }
     }
