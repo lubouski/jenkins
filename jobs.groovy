@@ -22,7 +22,7 @@ pipeline {
                     if (params.region != "ALL") {
                        sh "echo ${params.region}"
                     } else {
-                       sh "echo ${extraPackages}"
+                       sh "echo ${extraPackages.join(' ')}"
                     }
                  }
             }
