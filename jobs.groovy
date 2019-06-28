@@ -22,7 +22,7 @@ pipeline {
                     if (params.region != "ALL") {
                        sh "echo ${params.region}"
                     } else {
-                       sh "build.sh ${params.Version} ${extraPackages.join(' ')}"
+                       sh "./build.sh ${params.Version} ${extraPackages.join(' ')}"
                     }
                  }
             }
