@@ -1,6 +1,6 @@
 node {
          stage("test") {
-             sh "cat ${WORKSPACE}/Jenkinsfile.common.groovy"
+             sh "ls"
          }
 
    
