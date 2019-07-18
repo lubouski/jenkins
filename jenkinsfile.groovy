@@ -1,6 +1,6 @@
 node {
          stage("test") {
-             sh "cat Jenkinsfile.common.groovy"
+             sh "cat ${WORKSPACE}/Jenkinsfile.common.groovy"
          }
 
    
