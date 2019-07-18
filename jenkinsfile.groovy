@@ -7,6 +7,6 @@ node {
          def pipeline = load 'Jenkinsfile.common.groovy'
    
          stage("execution function") {
-             pipeline.exec_bash(hello, chubakka333)
+             pipeline.exec_bash('hello', 'chubakka333')
          }
 }
