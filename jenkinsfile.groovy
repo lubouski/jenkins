@@ -1,4 +1,8 @@
 node {
+    state("test") {
+        sh cat Jenkinsfile.common.groovy
+    }
+
     def pipeline = load 'Jenkinsfile.common.groovy'  
    
     stage("execution function") {
