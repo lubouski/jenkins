@@ -1,15 +1,10 @@
-def pipeline = load 'Jenkinsfile.common.groovy'
-
-pipeline {
-    agent any
-    stages {
+node {
          stage("test") {
              sh cat Jenkinsfile.common.groovy
          }
 
    
          stage("execution function") {
-             pipeline.exec_bash(hello, chubakka-333)
+             sh echo win-win-win!
          }
-  }
 }
