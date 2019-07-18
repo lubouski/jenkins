@@ -1,5 +1,5 @@
 node {
-    state("test") {
+    stage("test") {
         sh cat Jenkinsfile.common.groovy
     }
 
