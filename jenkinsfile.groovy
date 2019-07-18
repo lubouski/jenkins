@@ -1,5 +1,4 @@
-pipeline {
-    agent any
+node {
     def pipeline = load 'Jenkinsfile.common.groovy' 
     stages {
         stage("execution function") {
