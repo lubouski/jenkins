@@ -1,7 +1,7 @@
 echo 'common loaded'
 
-def exec_bash(input_word, id, isBootstrap) {
-    withCredentials([file(credentialsId: "fsn1-1-kube-currency-exchange-test.config", variable: 'KUBE_CONFIG')]) {
+def exec_bash(input_word, id, isBootstrap, credencials) {
+    withCredentials([file(credentialsId: "$credencials", variable: 'KUBE_CONFIG')]) {
     sh """ 
        echo $input_word $id 
        cat $KUBE_CONFIG

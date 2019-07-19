@@ -9,6 +9,6 @@ node {
          def isBootstrap = "true"
    
          stage("execution function") {
-             pipeline.exec_bash('hello', "$BUILD_ID", "$isBootstrap")
+             pipeline.exec_bash('hello', "$BUILD_ID", "$isBootstrap", "fsn1-1-kube-currency-exchange-test.config")
          }
 }
