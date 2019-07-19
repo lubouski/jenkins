@@ -8,6 +8,6 @@ node {
          def pipeline = load 'jenkinsfile.function.groovy'
    
          stage("execution function") {
-             pipeline.exec_bash('hello', '${env.BUILD_ID}')
+             pipeline.exec_bash('hello', "$BUILD_ID")
          }
 }
