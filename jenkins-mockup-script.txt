@@ -1,0 +1,37 @@
+def deploy(serviceName, isBootstrap, credentialsId, kubeManifest, appName, clusterName) {
+          withCredentials([file(credentialsId: "$credentialsId", variable: 'KUBE_CONFIG')]) {
+              sh """
+                 if [ "${isBootstrap}" = "true" ]
+                 then
+                   echo "${serviceName} cluster should be bootstrapped using ${kubeManifest}"
+                   echo "Delete old ${serviceName} cluster"
+                   /usr/bin/kubectl-1.12.3 --kubeconfig=${KUBE_CONFIG} delete -f ${kubeManifest} --ignore-not-found=true
+                   echo "Enable new ${serviceName} cluster in manifest"
+                   diff -u ${kubeManifest}.bkp ${kubeManifest} || true
+                 fi
+                 if [ "${clusterName}" = "test" ]
+                 then
+                   sed -i.bkp -e 's/test:test-[0-9]*\$/test:test-281/' ${kubeManifest}
+                 elif [ "${clusterName}" = "prod" ]
+                 then
+                   sed -i -e 's/cpu: \"3000m\"/cpu: \"16000m\"/' ${kubeManifest}; sed -i.bkp -e 's/test:test-[0-9]*\$/test:test-281/' ${kubeManifest}
+                 else
+                   echo "plese provide valid cluserName"; exit 1
+                 fi
+                 diff -u ${kubeManifest}.bkp ${kubeManifest} || true
+                 /usr/bin/kubectl-1.12.3 --kubeconfig=${KUBE_CONFIG} apply -f ${kubeManifest}
+              """                    
+          }
+}
+node {
+
+checkout([$class: 'GitSCM', 
+    branches: [[name: '*/master']], 
+    doGenerateSubmoduleConfigurations: false, 
+    extensions: [[$class: 'CleanCheckout']], 
+    submoduleCfg: [], 
+    userRemoteConfigs: [[credentialsId: 'xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx', url: 'https://stash.xxxxx.io/scm/xx/xxxxxx.git']]
+])    
+
+deploy("test_data", "true", "test.config", "image/k8s/test-data.yaml", "Test-app", "test")
+}
