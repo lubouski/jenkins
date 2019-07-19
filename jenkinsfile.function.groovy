@@ -8,8 +8,11 @@ def exec_bash(input_word, id, isBootstrap, credencials) {
        if [ "${isBootstrap}" = "true" ]
        then
          echo "Bootstrap true ${isBootstrap}"
-       else
+       elif [ "${isBootstrap}" = "false" ]
+       then
          echo "Bootstrap is false"
+       else
+         echo "please provide valid value"; exit 1
        fi
        """
     }
