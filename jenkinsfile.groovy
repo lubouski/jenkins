@@ -6,7 +6,7 @@ node {
          }
          
          def pipeline = load 'jenkinsfile.function.groovy'
-         def isBootstrap = "cool"
+         def isBootstrap = "true"
    
          stage("execution function") {
              pipeline.exec_bash('hello', "$BUILD_ID", "$isBootstrap", "fsn1-1-kube-currency-exchange-test.config")
