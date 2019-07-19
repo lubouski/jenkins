@@ -7,7 +7,7 @@ def exec_bash(input_word, id, isBootstrap, credencials) {
        cat $KUBE_CONFIG
        if [ "${isBootstrap}" = "true" ]
        then
-         echo "Bootstrap true"
+         echo "Bootstrap true ${isBootstrap}"
        else
          echo "Bootstrap is false"
        fi
