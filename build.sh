@@ -7,5 +7,3 @@ for value in $NAME
 do 
     echo $value-$VERSION
 done
-
-cat bootstrapmaster.sh
